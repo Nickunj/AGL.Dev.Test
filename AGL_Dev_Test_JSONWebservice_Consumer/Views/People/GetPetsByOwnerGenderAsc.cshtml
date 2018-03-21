@@ -4,18 +4,15 @@
     ViewBag.Title = "Get pets in ascending order by owner's gender";
 }
 
-<h2>Cat name in ascending order group by owner's gender</h2>
+<h3>A list of all the cats in alphabetical order under a heading of the gender of their owner</h3>
 @if (Model != null)
 {
-<div>
-    @foreach (var item in Model)
-    {
     <div>
-        <ul>
-            @if (!string.IsNullOrEmpty(item.gender))
+        @foreach (var item in Model)
+        {
+            if (!string.IsNullOrEmpty(item.gender))
             {
-                <li>
-                    <b>@item.gender</b>
+                <h4>@item.gender</h4>
                 <ul>
                     @foreach (var catItems in item.petname)
                     {
@@ -29,36 +26,31 @@
                         }
                     }
                 </ul>
-
-            </li>
             }
             else
             {
-                <li>Gender not defined
-                    <ul>
-                        @foreach (var catItems in item.petname)
+                <h4>Gender not defined</h4>
+                <ul>
+                    @foreach (var catItems in item.petname)
                         {
                             if (!string.IsNullOrEmpty(catItems))
                             {
-                                <li>@catItems</li>
-                            }
-                            else
-                            {
-                                <li>Cat names are empty</li>
-                            }
+                            <li>@catItems</li>
                         }
-                    </ul>
-            </li>
+                        else
+                        {
+                            <li>Cat names are empty</li>
+                        }
+                    }
+                </ul>
             }
-        </ul>
+        }
     </div>
-    }
-</div>
 }
 else
 {
     <div>
-        <p>@*Application has returned no data. Please contact helpdesk.*@</p>
+        <p>Application has returned no data. Please contact helpdesk.</p>
     </div>
 }
 
