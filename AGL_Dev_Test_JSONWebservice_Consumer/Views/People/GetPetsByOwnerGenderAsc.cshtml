@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AGL.DevTest.JSONWebserviceConsumer.Models.PeopleViewModel>
+
+@{
+    ViewBag.Title = "Get pets in ascending order by owner's gender";
+}
+
+<h2>Cat name in ascending order group by owner's gender</h2>
+@if (Model != null)
+{
+<div>
+    @foreach (var item in Model)
+    {
+    <div>
+        <ul>
+            @if (!string.IsNullOrEmpty(item.gender))
+            {
+                <li>
+                    <b>@item.gender</b>
+                <ul>
+                    @foreach (var catItems in item.petname)
+                    {
+                        if (!string.IsNullOrEmpty(catItems))
+                        {
+                            <li>@catItems</li>
+                        }
+                        else
+                        {
+                            <li>Cat names are empty</li>
+                        }
+                    }
+                </ul>
+
+            </li>
+            }
+            else
+            {
+                <li>Gender not defined
+                    <ul>
+                        @foreach (var catItems in item.petname)
+                        {
+                            if (!string.IsNullOrEmpty(catItems))
+                            {
+                                <li>@catItems</li>
+                            }
+                            else
+                            {
+                                <li>Cat names are empty</li>
+                            }
+                        }
+                    </ul>
+            </li>
+            }
+        </ul>
+    </div>
+    }
+</div>
+}
+else
+{
+    <div>
+        <p>@*Application has returned no data. Please contact helpdesk.*@</p>
+    </div>
+}
+
